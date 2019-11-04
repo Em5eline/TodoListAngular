@@ -66,10 +66,14 @@ export class TodoListComponent implements OnInit {
 
   }
 
+  removeAll() {
+    this.data.items.forEach(element => { this.removeItem(element)});
+  }
+
   howManyLeft() { //Renvoie le nombre de tâches restantes
     let count : number = this.data.items.length;
     for (let i = 0; i < this.data.items.length; i++) {
-      if (this.data.items[i].isDone == true) {count--}
+      if (this.data.items[i].isDone == true) {count--} //On garde seulement le nombre de tâches qui sont actives
     }
     return count;
   }

@@ -23,19 +23,20 @@
       </li>
     </ul>
   </section>
-  <footer class="footer"  *ngIf="this.data.items.length > 0">
+  <footer class="footer"  *ngIf="this.data.items.length > 0" [ngClass]="{size: howManyLeft() != this.data.items.length}">
     <span class="todo-count"><strong>{{ howManyLeft() }}</strong> {{howManyLeft() == 1 ? 'restante' : 'restantes'}}</span>
     <ul class="filters">
       <li>
-        <button class="filterAll" (click)="choice = 'toutes'">Toutes</button>
+        <a class="filterAll" (click)="choice = 'toutes'">Toutes</a>
       </li>
       <li>
-        <button class="filterActives" (click)="choice = 'actives'">Actives</button>
+        <a class="filterActives" (click)="choice = 'actives'">Actives</a>
       </li>
       <li>
-        <button class="filterCompleted" (click)="choice = 'completees'">Complétées</button>
+        <a class="filterCompleted" (click)="choice = 'completees'">Complétées</a>
       </li>
     </ul>
     <button class="clear-completed" *ngIf="howManyLeft() != this.data.items.length" (click)="removeSelected()">Supprimer cochées</button>
+    <button class="clear-all" (click)="removeAll()">Effacer tout</button>
   </footer>
 </section>
