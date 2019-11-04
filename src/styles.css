@@ -187,7 +187,9 @@ label[for='toggle-all'] {
   border: none; /* Mobile Safari */
   -webkit-appearance: none;
   appearance: none;
+  
 }
+
 
 .todo-list li .toggle:after {
   content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
@@ -292,21 +294,22 @@ label[for='toggle-all'] {
   display: inline;
 }
 
-.filters li a {
+.filters li button {
   color: inherit;
   margin: 3px;
   padding: 3px 7px;
   text-decoration: none;
   border: 1px solid transparent;
   border-radius: 3px;
+  margin-top: -5px;
 }
 
-.filters li a.selected,
-.filters li a:hover {
+.filters li button.selected,
+.filters li button:hover {
   border-color: rgba(175, 47, 47, 0.1);
 }
 
-.filters li a.selected {
+.filters li button.selected {
   border-color: rgba(175, 47, 47, 0.2);
 }
 

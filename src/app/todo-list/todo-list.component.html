@@ -1,36 +1,41 @@
 <section class="todoapp">
   <header class="header">
     <h1>{{titre}}</h1>
-    <form>
+    <form (submit)="appendItem(newTodoInput.value); newTodoInput.value = ''">
       <input  #newTodoInput
               name        = "newTodoInput"
               class       = "new-todo"
-              placeholder = "Que faire?"
+              placeholder = "Que faire ?"
               autofocus />
     </form>
   </header>
   <section class="main">
-    <input  class="toggle-all"
+    <input  
+            class="toggle-all"
             type="checkbox"
-            name="toggleAll"
+            (click)="selectUnselectAll()"
+            *ngIf="this.data.items.length > 0"
+            
     />
     <ul class="todo-list">
+      <li *ngFor="let item of items" [ngClass]="{completed: item.isDone, editing: item.editing}">
+        <app-todo-item [data]="item" *ngIf="choice == 'toutes' || choice == 'actives' && !item.isDone || choice == 'completees' && item.isDone"></app-todo-item>
+      </li>
     </ul>
   </section>
-  <footer class="footer">
-    <span class="todo-count"><strong></strong> restantes</span>
+  <footer class="footer"  *ngIf="this.data.items.length > 0">
+    <span class="todo-count"><strong>{{ howManyLeft() }}</strong> {{howManyLeft() == 1 ? 'restante' : 'restantes'}}</span>
     <ul class="filters">
       <li>
-        <a class="filterAll">Tous</a>
+        <button class="filterAll" (click)="choice = 'toutes'">Toutes</button>
       </li>
       <li>
-        <a class="filterActives">Actifs</a>
+        <button class="filterActives" (click)="choice = 'actives'">Actives</button>
       </li>
       <li>
-        <a class="filterCompleted">Complétés</a>
+        <button class="filterCompleted" (click)="choice = 'completees'">Complétées</button>
       </li>
     </ul>
-    <button class="clear-completed">Supprimer cochées</button>
+    <button class="clear-completed" *ngIf="howManyLeft() != this.data.items.length" (click)="removeSelected()">Supprimer cochées</button>
   </footer>
 </section>
-<hr/>

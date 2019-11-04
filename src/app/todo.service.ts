@@ -16,7 +16,7 @@ export class TodoService {
 
   setItemsLabel(label: string, ...items: TodoItemData[] ) {
     const tdl = this.todoListSubject.getValue();
-    this.todoListSubject.next( {
+    this.todoListSubject.next( { 
       label: tdl.label,
       items: tdl.items.map( I => items.indexOf(I) === -1 ? I : ({label, isDone: I.isDone}) )
     });
@@ -26,7 +26,7 @@ export class TodoService {
     const tdl = this.todoListSubject.getValue();
     this.todoListSubject.next( {
       label: tdl.label,
-      items: tdl.items.map( I => items.indexOf(I) === -1 ? I : ({label: I.label, isDone}) )
+      items: tdl.items.map( I => items.indexOf(I) === -1 ? I : ({label: I.label, isDone}) ) //Recalcule la liste et mets les items checked à la bonne valeur
     });
   }
 
@@ -45,5 +45,14 @@ export class TodoService {
       items: tdl.items.filter( I => items.indexOf(I) === -1 )
     });
   }
+
+  
+  selectAll(...items: TodoItemData[]) {
+    const tdl = this.todoListSubject.getValue();
+    for (let i = 0; i > tdl.items.length; i++) {
+      tdl.items[i].isDone = true;
+    } 
+  }
+  
 
 }
