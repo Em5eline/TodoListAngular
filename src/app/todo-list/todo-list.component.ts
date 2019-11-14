@@ -16,6 +16,9 @@ export class TodoListComponent implements OnInit {
   private data: TodoListData; //récupère les données de mon service
   private titre: string;
   private choice: string = 'toutes'; //Variable permettant de contrôler l'affichage de tâches spécifiques (Toutes, Actives, Complétées)
+  private undo: TodoListData;
+  private redo: TodoListData;
+
   
   constructor(private todoService: TodoService) { 
     todoService.getTodoListDataObserver().subscribe(tdl => this.data = tdl); //Je récupère mon service en tant qu'observable et je m'abonne (je reçois chaque maj et je mets à jour ma data). La todolist est stockée dans data
@@ -56,9 +59,10 @@ export class TodoListComponent implements OnInit {
 
   selectUnselectAll() { //Permet de tout sélectionner ou tout déselectionner
     if (this.data.items.every(val => val.isDone == true))
-      this.data.items.forEach(val => { val.isDone = false });
+      this.data.items.forEach(val => { this.todoService.setItemsDone(false,val) });
     else
-      this.data.items.forEach(val => { val.isDone = true });
+      this.data.items.forEach(val => {this.todoService.setItemsDone(true,val)});
+      
   }
 
   removeSelected() { //Suppression de toutes les tâches sélectionner

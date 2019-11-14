@@ -23,18 +23,24 @@ export class TodoItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  remove(item: TodoItemData) {
-    this.todoService.removeItems(item);
+  get label(): string {
+    return this.data.label;
   }
 
-  itemDone(item: TodoItemData, done:boolean) {
-    this.todoService.setItemsDone(done, item); //Recalcule la liste et mets les items checked à la bonne valeur
+  remove() {
+    this.todoService.removeItems(this.data);
   }
 
-  itemLabel(item: TodoItemData, label: string) {
-    this.todoService.setItemsLabel(label, item);
+  itemDone(item: TodoItemData, done:boolean) { //Recalcule la liste et mets les items checked à la bonne valeur
+    this.todoService.setItemsDone(done, item); 
+  }
+
+  itemLabel(item: TodoItemData, label: string) { //Change la valeur du label
+    this.todoService.setItemsLabel(label, item); 
     
   }
+
+ 
 
 
     

@@ -5,17 +5,17 @@
           [ngModel]= "data.isDone"
           (ngModelChange)= "itemDone(data, $event)"
           />
-  <label (dblclick) = "data.editing = true" class="texte">{{data.label}}</label>
-  <button class="destroy" (click)="remove(data)"></button>
+  <label (dblclick) = "data.editing = true" class="texte">{{label}}</label>
+  <button class="destroy" (click)="remove()"></button>
 </div>
 <form>
   <input  #newTextInput
-          [ngModel]="data.label"
-          name    = "label"
+          [ngModel]="label"
+          name    = "newTextInput"
           class   = "edit"
           type    = "text"
           *ngIf   = "data.editing"
-          (blur)  = "data.editing = false"
+          (blur)  = "itemLabel(data, newTextInput.value)"
           (keyup.enter) = "itemLabel(data, newTextInput.value)"
           />
 </form>
