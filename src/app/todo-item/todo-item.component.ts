@@ -31,8 +31,8 @@ export class TodoItemComponent implements OnInit {
     this.todoService.removeItems(this.data);
   }
 
-  itemDone(item: TodoItemData, done:boolean) { //Recalcule la liste et mets les items checked à la bonne valeur
-    this.todoService.setItemsDone(done, item); 
+  itemDone(item: TodoItemData, done:boolean) { //Recalcule la liste et met les items checked à la bonne valeur
+    this.todoService.setItemsDone(done, item);
   }
 
   itemLabel(item: TodoItemData, label: string) { //Change la valeur du label

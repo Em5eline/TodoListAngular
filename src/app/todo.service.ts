@@ -19,7 +19,7 @@ export class TodoService {
     this.todoListSubject.next( { 
       label: tdl.label,
       items: tdl.items.map( I => items.indexOf(I) === -1 ? I : ({label, isDone: I.isDone}) )
-    });
+    }); 
   }
 
   setItemsDone(isDone: boolean, ...items: TodoItemData[] ) {
@@ -36,7 +36,9 @@ export class TodoService {
       label: tdl.label, // ou on peut écrire: ...tdl,
       items: [...tdl.items, ...items]
     });
+    
   }
+
 
   removeItems( ...items: TodoItemData[] ) {
     const tdl = this.todoListSubject.getValue();
@@ -44,6 +46,7 @@ export class TodoService {
       label: tdl.label, // ou on peut écrire: ...tdl,
       items: tdl.items.filter( I => items.indexOf(I) === -1 )
     });
+    
   }
 
   
@@ -51,8 +54,17 @@ export class TodoService {
     const tdl = this.todoListSubject.getValue();
     for (let i = 0; i > tdl.items.length; i++) {
       tdl.items[i].isDone = true;
-    } 
+    }
   }
-  
+
+  loadLocalStorage(){
+    if ( localStorage.getItem('todo-list')){
+      let localTodoList: TodoListData = JSON.parse(localStorage.getItem('todo-list'))
+      this.setItemsLabel(localTodoList.label);
+      localTodoList.items.forEach(item => {
+        this.appendItems(item);
+      })
+    }
+  }
 
 }

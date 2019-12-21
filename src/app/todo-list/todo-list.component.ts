@@ -16,9 +16,6 @@ export class TodoListComponent implements OnInit {
   private data: TodoListData; //récupère les données de mon service
   private titre: string;
   private choice: string = 'toutes'; //Variable permettant de contrôler l'affichage de tâches spécifiques (Toutes, Actives, Complétées)
-  private undo: TodoListData;
-  private redo: TodoListData;
-
   
   constructor(private todoService: TodoService) { 
     todoService.getTodoListDataObserver().subscribe(tdl => this.data = tdl); //Je récupère mon service en tant qu'observable et je m'abonne (je reçois chaque maj et je mets à jour ma data). La todolist est stockée dans data
@@ -26,6 +23,14 @@ export class TodoListComponent implements OnInit {
   }                                                   
 
   ngOnInit() {
+
+    this.todoService.loadLocalStorage();
+     this.todoService.getTodoListDataObserver().subscribe(tdl => {
+       this.data = tdl
+       localStorage.setItem('todo-list', JSON.stringify(this.data))
+     }); 
+    
+      
   }
 
   get label(): string {
