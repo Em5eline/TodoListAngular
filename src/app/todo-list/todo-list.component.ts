@@ -13,9 +13,12 @@ export class TodoListComponent implements OnInit {
 
   @Input() 
   
-  private data: TodoListData; //récupère les données de mon service
+  private data: TodoListData; //Récupère les données de mon service
   private titre: string;
   private choice: string = 'toutes'; //Variable permettant de contrôler l'affichage de tâches spécifiques (Toutes, Actives, Complétées)
+  private redoTab: TodoItemData [] = []; //Tableau contenant les items annulés
+  private possibleRedo: number; //Quantité d'items annulés stockés
+  private showRedo: boolean = false; //Booléen permettant d'afficher le bouton "Refaire"
   
   constructor(private todoService: TodoService) { 
     todoService.getTodoListDataObserver().subscribe(tdl => this.data = tdl); //Je récupère mon service en tant qu'observable et je m'abonne (je reçois chaque maj et je mets à jour ma data). La todolist est stockée dans data
@@ -48,6 +51,7 @@ export class TodoListComponent implements OnInit {
           isDone : false}
       );
     }
+
   }
 
   itemDone(item: TodoItemData, done:boolean) {
@@ -62,7 +66,8 @@ export class TodoListComponent implements OnInit {
     this.todoService.removeItems(item);
   }
 
-  selectUnselectAll() { //Permet de tout sélectionner ou tout déselectionner
+  //Permet de tout sélectionner ou tout déselectionner
+  selectUnselectAll() { 
     if (this.data.items.every(val => val.isDone == true))
       this.data.items.forEach(val => { this.todoService.setItemsDone(false,val) });
     else
@@ -70,22 +75,42 @@ export class TodoListComponent implements OnInit {
       
   }
 
-  removeSelected() { //Suppression de toutes les tâches sélectionner
+  //Suppression de toutes les tâches sélectionner
+  removeSelected() { 
     this.data.items = this.data.items.filter(val => val.isDone == false);
 
   }
-
+  
+  //Efface tous les items de la todo list
   removeAll() {
     this.data.items.forEach(element => { this.removeItem(element)});
   }
 
-  howManyLeft() { //Renvoie le nombre de tâches restantes
+  //Renvoie le nombre de tâches restantes
+  howManyLeft() { 
     let count : number = this.data.items.length;
     for (let i = 0; i < this.data.items.length; i++) {
       if (this.data.items[i].isDone == true) {count--} //On garde seulement le nombre de tâches qui sont actives
     }
     return count;
   }
+
+  //Annule le dernier item ajouté
+  undo() {
+    this.possibleRedo = this.redoTab.push(this.data.items.pop());
+    this.showRedo = true;
+  }
+
+  //Ajoute à la todo list le dernier item annulé
+  redo() {
+    this.todoService.appendItems(this.redoTab.pop());
+    this.possibleRedo -= 1;
+    if (this.possibleRedo == 0) {
+      this.showRedo = false;
+    }
+  }
+
+  
 
   
   
