@@ -13,12 +13,12 @@ export class TodoListComponent implements OnInit {
 
   @Input() 
   
-  private data: TodoListData; //Récupère les données de mon service
-  private titre: string;
-  private choice: string = 'toutes'; //Variable permettant de contrôler l'affichage de tâches spécifiques (Toutes, Actives, Complétées)
-  private redoTab: TodoItemData [] = []; //Tableau contenant les items annulés
-  private possibleRedo: number; //Quantité d'items annulés stockés
-  private showRedo: boolean = false; //Booléen permettant d'afficher le bouton "Refaire"
+  data: TodoListData; //Récupère les données de mon service
+  titre: string;
+  choice: string = 'toutes'; //Variable permettant de contrôler l'affichage de tâches spécifiques (Toutes, Actives, Complétées)
+  redoTab: TodoItemData [] = []; //Tableau contenant les items annulés
+  possibleRedo: number; //Quantité d'items annulés stockés
+  showRedo: boolean = false; //Booléen permettant d'afficher le bouton "Refaire"
   
   constructor(private todoService: TodoService) { 
     todoService.getTodoListDataObserver().subscribe(tdl => this.data = tdl); //Je récupère mon service en tant qu'observable et je m'abonne (je reçois chaque maj et je mets à jour ma data). La todolist est stockée dans data
@@ -48,7 +48,9 @@ export class TodoListComponent implements OnInit {
     if (label != '') {
       this.todoService.appendItems(
         { label, 
-          isDone : false}
+          isDone : false,
+          editing: false
+        }
       );
     }
 

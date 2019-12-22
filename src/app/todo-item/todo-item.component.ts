@@ -12,8 +12,8 @@ import {TodoService} from '../todo.service';
 export class TodoItemComponent implements OnInit {
 
   @Input() 
-  private data: TodoItemData; //Décorateur : Faire le bind entre les données et les éléments HTML. Data est instancié par la boucle *ngFor
-
+  data: TodoItemData; //Décorateur : Faire le bind entre les données et les éléments HTML. Data est instancié par la boucle *ngFor
+  
   
 
   constructor(private todoService: TodoService) { 

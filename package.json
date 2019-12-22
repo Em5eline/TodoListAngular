@@ -8,7 +8,8 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build.prod": "ng build --environment=prod && tar -zcvf archive.tar.gz dist/prod/*"
   },
   "private": true,
   "dependencies": {
@@ -19,15 +20,17 @@
     "@angular/forms": "^8.2.10",
     "@angular/platform-browser": "^8.2.10",
     "@angular/platform-browser-dynamic": "^8.2.10",
+    "@angular/pwa": "^0.803.21",
     "@angular/router": "^8.2.10",
+    "@angular/service-worker": "^8.2.10",
     "core-js": "^2.4.1",
     "rxjs": "^6.5.3",
+    "rxjs-compat": "^6.0.0-rc.0",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1",
-    "rxjs-compat": "^6.0.0-rc.0"
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.9",
+    "@angular-devkit/build-angular": "^0.803.21",
     "@angular/cli": "^8.3.9",
     "@angular/compiler-cli": "^8.2.10",
     "@angular/language-service": "^8.2.10",
