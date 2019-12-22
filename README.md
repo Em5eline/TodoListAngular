@@ -6,10 +6,10 @@
 - Nodejs doit être installé.
 - `git clone https://github.com/Em5eline/TodoListAngular.git`
 - `npm install`
-- `npm i lite-server -g` nécessaire pour la fonctionnalité PWA
+- `npm i lite-server -g` (nécessaire pour la fonctionnalité PWA)
 - `ng serve`
-- `ng build --prod`
-- `lite-server --baseDir=dist`nécessaire pour la fonctionnalité PWA. L'application sera visible sur http://localhost:3000/
+- `ng build --prod` (nécessaire pour la fonctionnalité PWA)
+- `lite-server --baseDir=dist` (nécessaire pour la fonctionnalité PWA) L'application sera visible sur http://localhost:3000/
 Attention, les extensions Chrome posent problèmes avec la fonctionnalité PWA, il est donc préféré d'ouvrir http://localhost:3000 en navigation privée afin d'obtenir les scores Chrome Lighthouse. 
 
 
