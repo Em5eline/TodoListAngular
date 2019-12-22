@@ -4,7 +4,7 @@
 ## Installation et lancement du projet 
 
 - Nodejs doit être installé.
-- `git clone http://...`
+- `git clone https://github.com/Em5eline/TodoListAngular.git`
 - `npm install`
 - `npm i lite-server -g` nécessaire pour la fonctionnalité PWA
 - `ng serve`
